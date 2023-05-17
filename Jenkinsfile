@@ -69,7 +69,7 @@ pipeline {
                 sh '''#!/bin/bash
                 while true
                 do
-                    if [[ $(kubectl get pods -l app=detectorapp | awk '{print $3}' | tail -n1) == Running ]]
+                    if [[ $(kubectl get pods -l app=detectorapp | awk '{print $3}' | tail -n1) == Running ]] && [[ $(kubectl get pods -l app=mysql | awk '{print $3}' | tail -n1) == Running ]]
                     then
                         echo "the app is running ill break now"
                         break
