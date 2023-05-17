@@ -67,10 +67,10 @@ pipeline {
         stage('insert-sql-script'){
             steps {
                 sh '''#!/bin/bash
-                sleep 15
+                sleep 30
                 kubectl exec -i $(kubectl get pods -l app=mysql -o=name) -- mysql -u$(echo $user | base64 -d) -p$(echo $password | base64 -d) $dbname < src/main/resources/import.sql
                 '''
-                /////this should not be done in production.?
+                /////this should not be done in production.
             }
         }
     }
