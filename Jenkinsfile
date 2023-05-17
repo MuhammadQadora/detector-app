@@ -42,15 +42,15 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github-token', url: 'https://github.com/MuhammadQadora/detector-app.git']])
             }
         }
-        stage('kaniko-buildimage'){
-            steps {
-                container(name: 'kaniko', shell: '/busybox/sh'){
-                    sh '''#!/busybox/sh
-                    /kaniko/executor --context `pwd` --destination muhammadqadora/detector
-                    '''
-                }
-            }
-        }
+        // stage('kaniko-buildimage'){
+        //     steps {
+        //         container(name: 'kaniko', shell: '/busybox/sh'){
+        //             sh '''#!/busybox/sh
+        //             /kaniko/executor --context `pwd` --destination muhammadqadora/detector
+        //             '''
+        //         }
+        //     }
+        // }
         stage('deployment-kubernetes'){
             steps {
                 sh '''#!/bin/bash
@@ -67,16 +67,7 @@ pipeline {
         stage('insert-sql-script'){
             steps {
                 sh '''#!/bin/bash
-                while true
-                do
-                    if [[ $(kubectl get pods -l app=detectorapp | awk '{print $3}' | tail -n1) == Running ]] && [[ $(kubectl get pods -l app=mysql | awk '{print $3}' | tail -n1) == Running ]]
-                    then
-                        echo "the app is running ill break now"
-                        break
-                    else
-                        continue
-                    fi
-                done
+                sleep 15
                 kubectl exec -i $(kubectl get pods -l app=mysql -o=name) -- mysql -u$(echo $user | base64 -d) -p$(echo $password | base64 -d) $dbname < src/main/resources/import.sql
                 '''
                 /////this should not be done in production.
