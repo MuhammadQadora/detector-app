@@ -39,7 +39,7 @@ pipeline {
     stages {
         stage('checkout-github') {
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github-token', url: 'https://github.com/MuhammadQadora/freight.git']])
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github-token', url: 'https://github.com/MuhammadQadora/detector-app.git']])
             }
         }
         stage('kaniko-buildimage'){
