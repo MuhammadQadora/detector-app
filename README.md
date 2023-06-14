@@ -1,2 +1,3 @@
 # detector-app
-![image](https://github.com/MuhammadQadora/detector-app/assets/110588924/94c6e48f-1c24-4141-88ee-af3881de04dc)
+
+![freightos-pipeline](https://github.com/MuhammadQadora/detector-app/assets/110588924/2341c979-8432-42fc-ac2a-61dc5a688686)
